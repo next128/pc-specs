@@ -10,13 +10,11 @@
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 
-
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
-
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 </head>
 <header>
@@ -27,11 +25,10 @@
 <body>
 
     <div class="container" id="tabs">
-        <div class="tab whiteborder">My PC</div>
-        <div class="tab">Monitors</div>
-        <div class="tab">Accesories</div>
-        
-        <div class="tabContent">
+
+        {% include "../templs/tabs.html" %}
+
+        <div class="tabContent" v-show="currentTab == 'pc'">
 
             <div class="base">
                 <p class="title">CPU</p>
@@ -88,7 +85,7 @@
         </div>
 
 
-        <div class="tabContent">
+        <div class="tabContent" v-show="currentTab == 'monitor'">
             
             <div class="base">
                 <p class="title">LG</p>
@@ -98,7 +95,7 @@
         </div>
 
 
-        <div class="tabContent">
+        <div class="tabContent" v-show="currentTab == 'accessories'">
 
             <div class="base">
                 <p class="title">MOUSE</p>
