@@ -1,26 +1,35 @@
 'use strict';
 
-const { createApp } = Vue;
+const { createApp, ref } = Vue;
+const { createVuetify } = Vuetify;
 
-createApp({
+const vuetify = createVuetify({
+    icons: {
+        defaultSet: 'mdi', // This is already the default value - only for display purposes
+    },
+})
+
+
+createApp ({
   data() {
     return {
-      currentTab: 'pc'
+      currentTab: 'pc',
     };
   },
-}).mount('#tabs');
+}).use(vuetify).mount('body');
 
 
-tippy('#keyboard', {
-  content: '<p style="font-size: 19px">BASE: Stock<br>SWITCHES: Durock T1<br>KEYCAPS: Stock<p>',
-  followCursor: true,
-  allowHTML: true
-});
+let paragraphs = document.getElementsByTagName("p");
+for (let i = 0; i < paragraphs.length; i++) {
+    paragraphs[i].innerHTML = (paragraphs[i].textContent).replaceAll("repl", "<br>");
+}
 
+let inp = document.querySelectorAll("input");
+let btn = document.getElementById('save');
 
-tippy('#case', {
-  content: '<p style="font-size: 19px; width: 100%">TOP: Stock<br>BOTTOM: Dynamic X2 GP-18 PWM<br>FRONT: 3x Arctic P14 PWM<br>EXHAUST: Thermaltake Toughfan 12<p>',
-  followCursor: true,
-  allowHTML: true,
-  maxWidth: '100%'
-});
+for (let i = 0; i < inp.length; i++) {
+    inp[i].addEventListener('input', function (e) {
+        btn.disabled = '';
+    });
+}
+
