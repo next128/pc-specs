@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_page, name='Specs'),
     path('<str:snippet>', views.paste_page, name='PC'),
-    path('/error', views.error_page, name='Error')
+    path('error', views.error_page, name='Error')
 ]

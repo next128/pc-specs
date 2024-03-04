@@ -2,6 +2,7 @@
     <p class="title">{{ item.title }}</p>
     <p class="inside"  {% if item.dop %}style="text-decoration: 2px underline #FF0; cursor: pointer;"{% else %}{% endif %}>{% if item.data %}{{ item.data }}{% else %}NOT CONFIGURED{% endif %}</p>
 </div>
+
 {% if item.hr %}
 <hr>
 {% else %}

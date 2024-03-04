@@ -1,45 +1,31 @@
 <div class="base">
     <p class="title">{{ item.title }}</p>
     <div style="width: 80%">
-   {% if item.multi %}
-       <v-textarea
+       <v-text-field
          name = "{{ item.id }}"
          id="{{ item.id }}"
          placeholder="Enter text"
          variant="outlined"
-         hint="Enter your {{ item.title }} name...(enter each spec on different lines!!!)"
-         class="sarea"
-       ></v-textarea>
-   {% else %}
-
-   <v-text-field
-     name = "{{ item.id }}"
-     id="{{ item.id }}"
-     placeholder="Enter text"
-     variant="outlined"
-     hint="Enter your {{ item.title }} name..."
-     class="stext"
-   ></v-text-field>
-
-        {% if item.dop %}
-            {% for block in item.dop %}
-                <div style="display: flex; text-align: center">
-                    <p style="color: white; font-size: 19px; margin: auto 0 auto 15px; min-width: 75px; width: 15%">{{ block.title }}</p>
-                    <v-text-field
-                     name = "{{ block.id }}"
-                     id="{{ block.id }}"
-                     placeholder="Enter text"
-                     variant="outlined"
-                     hint="Enter your {{ block.title }} fans..."
-                     class="stext"
-                     style="width: 85%;"
-                   ></v-text-field>
-                </div>
-            {% endfor %}
-        {% else %}
-        {% endif %}
-
-   {% endif %}
+         hint="Enter your {{ item.title }} name...(ENTER SPECS SEPARATED BY COMMAS!!!)"
+         class="stext"
+       ></v-text-field>
+       {% if item.dop %}
+           {% for block in item.dop %}
+               <div style="display: flex; text-align: center">
+                   <p style="color: white; font-size: 19px; margin: auto 0 auto 15px; min-width: 75px; width: 15%">{{ block.title }}</p>
+                   <v-text-field
+                    name = "{{ block.id }}"
+                    id="{{ block.id }}"
+                    placeholder="Enter text"
+                    variant="outlined"
+                    hint="Enter your {{ block.title }} fans..."
+                    class="stext"
+                    style="width: 85%;"
+                  ></v-text-field>
+               </div>
+           {% endfor %}
+       {% else %}
+       {% endif %}
     </div>
 </div>
 

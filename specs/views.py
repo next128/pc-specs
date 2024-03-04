@@ -6,6 +6,22 @@ import secrets
 import string
 
 
+class Card:
+    def __init__(self, title, hr, id, dop):
+        self.title = title
+        self.hr = hr
+        self.id = id
+        self.dop = dop
+
+    def get_dict(self):
+        return {
+            'title': self.title,
+            'hr': self.hr,
+            'id': self.id,
+            'dop': self.dop
+        }
+
+
 def get_random_name():
     letters = string.ascii_letters
     digits = string.digits
@@ -20,14 +36,14 @@ def get_random_name():
 def get_pc_specs():
     specs = {
         'mypc': [
-            Card('CPU', True, 'cpu_name', False, False),
-            Card('GPU', True, 'gpu_name', False, False),
-            Card('MB', True, 'mb_name', False, False),
-            Card('RAM', True, 'ram_name', False, False),
-            Card('COOLING', True, 'cooling_name', True, False),
-            Card('PSU', True, 'psu_name', False, False),
-            Card('STORAGE', True, 'storage_name', True, False),
-            Card('CASE', False, 'case_name', False, [
+            Card('CPU', True, 'cpu_name', False),
+            Card('GPU', True, 'gpu_name', False),
+            Card('MB', True, 'mb_name', False),
+            Card('RAM', True, 'ram_name', False),
+            Card('COOLING', True, 'cooling_name', False),
+            Card('PSU', True, 'psu_name', False),
+            Card('STORAGE', True, 'storage_name', False),
+            Card('CASE', False, 'case_name', [
                 {'title': 'TOP', 'id': 'top_name'},
                 {'title': 'BOTTOM', 'id': 'bottom_name'},
                 {'title': 'FRONT', 'id': 'front_name'},
@@ -37,51 +53,33 @@ def get_pc_specs():
         ],
 
         'monitors': [
-            Card('MONITORS', False, 'monitor_name', True, False)
+            Card('MONITORS', False, 'monitor_name', False)
         ],
 
         'accessories': [
-            Card('MOUSE', True, 'mouse_name', False, False),
-            Card('MOUSEPAD', True, 'mousepad_name', False, False),
-            Card('KEYBOARD', True, 'keyboard_name', False, [
+            Card('MOUSE', True, 'mouse_name', False),
+            Card('MOUSEPAD', True, 'mousepad_name', False),
+            Card('KEYBOARD', True, 'keyboard_name', [
                 {'title': 'BASE', 'id': 'base_name'},
                 {'title': 'SWITCHES', 'id': 'switches_name'},
                 {'title': 'STABS', 'id': 'stab_name'},
                 {'title': 'LUBE', 'id': 'lube_name'},
                 {'title': 'KEYCAPS', 'id': 'keycaps_name'},
             ]),
-            Card('SPEAKERS', True, 'speakers_name', True, False),
-            Card('HEADPHONES', True, 'headphones_name', False, [
+            Card('SPEAKERS', True, 'speakers_name', False),
+            Card('HEADPHONES', True, 'headphones_name', [
                 {'title': 'AMP', 'id': 'amp_name'},
             ]),
-            Card('AUDIO_IFACE', True, 'audio_int_name', False, False),
-            Card('MIC', False, 'mic_name', False, False),
+            Card('AUDIO_IFACE', True, 'audio_int_name', False),
+            Card('MIC', False, 'mic_name', False),
         ]
     }
     return specs
 
 
 def nr_to_br(s):
-    s = s.replace('\r\n', 'repl')
+    s = s.replace(",", 'repl')
     return s
-
-
-class Card:
-    def __init__(self, title, hr, id, multi, dop):
-        self.title = title
-        self.hr = hr
-        self.id = id
-        self.multi = multi
-        self.dop = dop
-
-    def get_dict(self):
-        return {
-            'title': self.title,
-            'hr': self.hr,
-            'id': self.id,
-            'multi': self.multi,
-            'dop': self.dop
-        }
 
 
 def index_page(request: WSGIRequest):
@@ -109,7 +107,7 @@ def index_page(request: WSGIRequest):
                     new_d.append([tip['title'], request.POST[tip['id']]])
 
             d['dop'] = new_d
-            d['data'] = nr_to_br(request.POST[item.id])
+            d['data'] = nr_to_br(request.POST[item.id])  # Replacing commas to breaks
             data['mypc'].append(d)
 
         for item in context['monitors']:
@@ -126,7 +124,7 @@ def index_page(request: WSGIRequest):
                     new_d.append([i['title'], request.POST[i['id']]])
 
             d['dop'] = new_d
-            d['data'] = nr_to_br(request.POST[item.id])
+            d['data'] = nr_to_br(request.POST[item.id])  # Replacing commas to breaks
             data['monitors'].append(d)
 
         for item in context['accessories']:
@@ -143,10 +141,10 @@ def index_page(request: WSGIRequest):
                     new_d.append([i['title'], request.POST[i['id']]])
 
             d['dop'] = new_d
-            d['data'] = nr_to_br(request.POST[item.id])
+            d['data'] = nr_to_br(request.POST[item.id])  # Replacing commas to breaks
             data['accessories'].append(d)
 
-        print(data)
+        # print(data)
 
         snippet.data, snippet.name = data, get_random_name()
         snippet.save()
@@ -159,7 +157,7 @@ def index_page(request: WSGIRequest):
 def paste_page(request: WSGIRequest, snippet):
     al = Snippet.objects.all()
     flag = False
-    for obj in al:
+    for obj in al:  # Checking the existence of a snippet
         if obj.name == snippet:
             flag = True
 
