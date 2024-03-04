@@ -5,9 +5,10 @@
     <title>Paste</title>
     {% include "../templs/style.html" %}
 </head>
-<header>
-    <a href="/"><button class="save_btn">New</button></a>
-    <div style="color: white; font-size: 40px; text-align: center;">[tecnopaste]</div>
+<header class="sc-dlfmHC loKqwI">
+    <div class="sc-hKgKIp eTEtzu">
+        <a href="/" style="text-decoration: none; color: rgb(201, 209, 217);"><button class="sc-bdfCDU eSVGxo">[new]</button></a>
+    </div>
 </header>
 
 <body>
@@ -28,6 +29,17 @@
             {% for item in accessories %}
                 {% include "../templs/final_block.html" %}
             {% endfor %}
+        </div>
+        <div class="tabContent" v-show="currentTab == 'gallery'">
+            <v-carousel hide-delimiters height="700px">
+                {% for item in gallery.data %}
+                <v-carousel-item
+                  src="{{ item }}"
+
+                ></v-carousel-item>
+                {% endfor %}
+                </div>
+            </v-carousel>
         </div>
     </div>
 

@@ -72,6 +72,10 @@ def get_pc_specs():
             ]),
             Card('AUDIO_IFACE', True, 'audio_int_name', False),
             Card('MIC', False, 'mic_name', False),
+        ],
+
+        'gallery': [
+            Card('IMG_URLS', False, 'image_url', False),
         ]
     }
     return specs
@@ -90,7 +94,8 @@ def index_page(request: WSGIRequest):
         data = {
             'mypc': [],
             'monitors': [],
-            'accessories': []
+            'accessories': [],
+            'gallery': []
         }
 
         for item in context['mypc']:
@@ -144,6 +149,24 @@ def index_page(request: WSGIRequest):
             d['data'] = nr_to_br(request.POST[item.id])  # Replacing commas to breaks
             data['accessories'].append(d)
 
+        for item in context['gallery']:
+            same = None
+            for obj in context['gallery']:
+                if obj.id == item.id:
+                    same = obj
+                    break
+
+            d = same.get_dict()
+            new_d = []
+            if d['dop']:
+                for i in d['dop']:
+                    new_d.append([i['title'], request.POST[i['id']]])
+
+            d['dop'] = new_d
+            iv = nr_to_br(request.POST[item.id])  # intermediate value
+            d['data'] = list(map(str, iv.split('repl')))
+            data['gallery'].append(d)
+
         # print(data)
 
         snippet.data, snippet.name = data, get_random_name()
@@ -167,6 +190,7 @@ def paste_page(request: WSGIRequest, snippet):
             'mypc': eval(obj.data)['mypc'],
             'monitors': eval(obj.data)['monitors'],
             'accessories': eval(obj.data)['accessories'],
+            'gallery': (eval(obj.data)['gallery'])[0]
         }
 
         return render(request, 'pages/final.html', context)

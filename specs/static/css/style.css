@@ -7,6 +7,10 @@ body {
 hr {
     margin-top: 5px;
     margin-bottom: 5px;
+    color: white;
+    background: white;
+    height: 2px;
+    opacity: 1;
 }
 
 header {
@@ -16,7 +20,7 @@ header {
 }
 
 .container {
-    margin: 40px auto 0 auto;
+    margin: 60px auto 40px auto;
     min-width: 808px;
     width: 60%;
     position: relative;
@@ -113,7 +117,7 @@ header {
 }
 
 #tabs .tabContent {
-    padding: 5px 15px 5px 15px;
+    padding: 10px 15px 5px 15px;
     border-radius: 0 5px 5px 5px;
     border: 2px solid white;
     animation: ani 1.5s forwards;
@@ -125,4 +129,32 @@ header {
 
 #tabs .show {
     display: block;
+}
+
+.loKqwI {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    width: 100%;
+    height: 2em;
+    color: rgb(201, 209, 217);
+    background: rgb(1, 4, 9);
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.eTEtzu {
+    display: flex;
+    align-items: center;
+}
+
+.eSVGxo {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 0.25em;
+    color: inherit;
+    text-decoration: none;
 }
