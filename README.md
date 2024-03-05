@@ -10,12 +10,25 @@ pc-specs is a service to saving your computer specifications.
 
 * [See requirements](requirements.txt)
 
-### Install
+### Install (Linux)
 
-1. Upgrade pip ```pip install --upgrade pip```
-2. If you don't have  python venv, install it in root directory: ```python -m venv venv```
-3. install requirements ```pip install -r requirements.txt```
-4. Apply DB changes ```python manage.py makemigrations``` ```python manage.py migrate```
+1. Сlone the repository to the selected folder ```git clone https://github.com/next128/pc-specs.git``` and go to the repository folder ```cd YOUR_FOLDER/pc-specs```
+2. If you don't have python virtual environment, install it in repository folder: ```python3 -m venv venv```
+3. Connect venv ```source venv/bin/activate```
+4. Upgrade pip ```pip install --upgrade pip```
+5. Install requirements ```pip install -r requirements.txt```
+6. Apply Database changes ```python3 manage.py makemigrations``` and then ```python3 manage.py migrate```
+
+### Install (Windows)
+
+1. Сlone the repository to the selected folder ```git clone https://github.com/next128/pc-specs.git```
+2. Open YOUR_FOLDER/pc-specs in your IDE (pycharm, for example)
+3. If you don't have python virtual environment, install it in repository folder: ```python -m venv venv```
+4. Set new venv in IDE (Add new interpreter -> then select venv/Scripts/python.exe)
+5. Upgrade pip ```pip install --upgrade pip```
+6. Install requirements ```pip install -r requirements.txt```
+7. Apply Database changes ```python manage.py makemigrations``` and then ```python manage.py migrate```
+
 
 ### Run
 
